@@ -1,5 +1,4 @@
 #   degree = BS CS / SET A
-
 import pandas as pd
 
 print("》》》》》》》》》》》》 PLEASE ENTER YOUR USER INFORMATION BELOW 《《《《《《《《《《《《")
@@ -8,6 +7,15 @@ name = input("⌨ Name: ")
 age = int(input("⌨ Age: "))
 district_number = int(input("⌨ District Number: "))
 print("")
+
+#new variable set
+'''districts = ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9"]
+data = {
+    'Red': [districts[0], districts[2], districts[4]],
+    'Blue': [districts[1], districts[3], districts[5]],
+    'Green': [districts[6], districts[7], districts[8]]
+}
+'''
 
 data = {
     'District': [1, 2, 3, 4, 5, 6, 7, 8, 9],
