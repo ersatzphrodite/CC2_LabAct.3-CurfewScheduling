@@ -1,5 +1,38 @@
 #BEHOLD THE ERSATZ SYSTEM OR WHATEVZ XD
+#This shit works
+#oct/16/2023 00:33
 import pandas as pd
+
+districts = ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9"]
+
+d_colors = {
+    'Red': [districts[0], districts[2], districts[4]],
+    'Blue': [districts[1], districts[3], districts[5]],
+    'Green': [districts[6], districts[7], districts[8]]
+}
+
+d_schedules = {
+    'Red': ["MarketDays : Mon, Wed. 06:00 - 21:00", "Curfew: Mon, Wed, Sat. 20:00 - 05:00"],
+    'Blue': ["MarketDays : Tue, Sat. 06:00 - 19:00", "Curfew: Mon, Tue, Fri. 20:00 - 05:00"],
+    'Green': ["MarketDays: Thur, Fri. 06:00 - 19:00", "Curfew: Tue, Fri, Sat. 20:00 - 06:00"]
+}
+
+color = pd.DataFrame(d_colors)
+schedule = pd.DataFrame(d_schedules)
+
+red_districts = color['Red'].tolist() 
+blue_districts = color['Blue'].tolist()
+green_districts = color['Green'].tolist()
+
+red_schedules = schedule['Red'].tolist() 
+blue_schedules = schedule['Blue'].tolist()
+green_schedules = schedule['Green'].tolist()
+
+
+def get_district():
+    district = input("Enter district: ")
+    return district
+
 
 def get_age():
     while True:
@@ -22,41 +55,44 @@ def get_age():
             print("Invalid input")
             print("---------------------")
 
-def check_district_color(age):
-    districts = ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9"]
 
-    data = {
-        'Red': [districts[0], districts[2], districts[4]],
-        'Blue': [districts[1], districts[3], districts[5]],
-        'Green': [districts[6], districts[7], districts[8]]
-    }
-    
-    color_mapping = pd.DataFrame(data)
-    print(color_mapping)
-
-    while True:
-        print("--------------------------------------")
-        district_input = input("Enter a district: ")
-
-        district_info = color_mapping[color_mapping.isin([district_input])].dropna(how='all')
-        if not district_info.empty:
-            district_color = district_info.columns[0]
-            if district_color == 'Red':
-                #age checker
-                if age > 60 or age < 18:
-                    print("Dika belong")
-                    return
-                else:
-                    print("Belong ka")
-                    return 
-                print("WOW!")
-            elif district_color == 'Blue':
-                print("OOPSIE!")
-            elif district_color == 'Green':
-                print("TRY AGAIN!")
-            break
+def check_credentials(age):
+    while True: 
+        if district in red_districts:
+            print("You belong to Red")
+            if age > 60 or age < 18:
+                print(red_schedules[0])
+                print(red_schedules[1])
+                return
+            else:
+                print(red_schedules[0])
+                return
+                
+        elif district in blue_districts:
+            print("You belong to Blue")
+            if age > 60 or age < 18:
+                print(blue_schedules[0])
+                print(blue_schedules[1])
+                return
+            else:
+                print(blue_schedules[0])
+                return
+                
+        elif district in green_districts:
+            print("You belong to Green")
+            if age > 60 or age < 18:
+                print(green_schedules[0])
+                print(green_schedules[1])
+                return
+            else:
+                print(green_schedules[0])
+                return
+                
         else:
-            print("District not found. Please try again.")
-
+            print("You belong to me chariz")
+            return
+        
+district = get_district()
 age = get_age()
-check_district_color(age)
+check_credentials(age)
+
