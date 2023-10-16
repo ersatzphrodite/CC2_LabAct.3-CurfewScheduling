@@ -1,9 +1,9 @@
-#BEHOLD THE ERSATZ SYSTEM OR WHATEVZ XD
-#This shit works
-#oct/16/2023 00:33
+# BEHOLD THE ERSATZ SYSTEM OR WHATEVZ XD
+# Revised Version
+# oct/16/2023 12:22
 import pandas as pd
 
-districts = ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9"]
+districts = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 d_colors = {
     'Red': [districts[0], districts[2], districts[4]],
@@ -20,46 +20,55 @@ d_schedules = {
 color = pd.DataFrame(d_colors)
 schedule = pd.DataFrame(d_schedules)
 
-red_districts = color['Red'].tolist() 
+red_districts = color['Red'].tolist()
 blue_districts = color['Blue'].tolist()
 green_districts = color['Green'].tolist()
 
-red_schedules = schedule['Red'].tolist() 
+red_schedules = schedule['Red'].tolist()
 blue_schedules = schedule['Blue'].tolist()
 green_schedules = schedule['Green'].tolist()
 
+def get_name():
+    while True:
+        print("Please follow this format: ")
+        print("<LastName>, <FirstName(s)> <MiddleInitial>.")
+        name = input("Enter your name: ")
+        if all(char.isalpha() or char.isspace() or char in "., " for char in name):
+            return name
+        else:
+            print("Error: Invalid credentials. Please try again.")
+            print("---------------------")
 
 def get_district():
-    district = input("Enter district: ")
-    return district
+    while True:
+        print("Enter your District number")
+        try:
+            district = int(input("District: "))
+            if district in districts:
+                return district
+            else:
+                print("Unregistered District.")
+                print("Please select one of the following districts")
+                for i in districts:
+                    print(f"    -District {i}")
+        except ValueError:
+            print("Invalid Credentials. Please try again.")
 
 
 def get_age():
     while True:
         try:
             age = int(input("Enter age: "))
-            while True:
-                print("---------------------")
-                print(f"Entered age: {age}")
-                confirmation = input("Please confirm if the credentials are correct (y/n): ")
-                if confirmation == "y":
-                    print("---------------------")
-                    return age
-                elif confirmation == "n":
-                    print("Resubmit credentials.")
-                    print("---------------------")
-                    break  
-                else:
-                    print("Invalid response. Please enter 'y' or 'n'.")
+            return age
         except ValueError:
             print("Invalid input")
             print("---------------------")
 
 
-def check_credentials(age):
-    while True: 
+def check_credentials(age, district):
+    while True:
         if district in red_districts:
-            print("You belong to Red")
+            print("DISTRICT : RED")
             if age > 60 or age < 18:
                 print(red_schedules[0])
                 print(red_schedules[1])
@@ -67,9 +76,9 @@ def check_credentials(age):
             else:
                 print(red_schedules[0])
                 return
-                
+
         elif district in blue_districts:
-            print("You belong to Blue")
+            print("DISTRICT : BLUE")
             if age > 60 or age < 18:
                 print(blue_schedules[0])
                 print(blue_schedules[1])
@@ -77,9 +86,9 @@ def check_credentials(age):
             else:
                 print(blue_schedules[0])
                 return
-                
+
         elif district in green_districts:
-            print("You belong to Green")
+            print("DISTRICT : GREEN")
             if age > 60 or age < 18:
                 print(green_schedules[0])
                 print(green_schedules[1])
@@ -87,12 +96,20 @@ def check_credentials(age):
             else:
                 print(green_schedules[0])
                 return
-                
+
         else:
             print("You belong to me chariz")
             return
-        
-district = get_district()
-age = get_age()
-check_credentials(age)
 
+def display_profile():
+    name = get_name()
+    district = get_district()
+    age = get_age()
+
+    print(f"NAME : {name}")
+    print(f"AGE : {age}")
+    check_credentials(age, district)
+    print(f"Sunday Curfew: 21:00 - 06:00")
+
+
+display_profile()
