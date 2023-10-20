@@ -1,6 +1,6 @@
 # BEHOLD THE ERSATZ SYSTEM OR WHATEVZ XD
-# Finalized Version
-# oct/20/2023 17:30 
+# Version 1.1
+# oct/20/2023 19:33
 import pandas as pd
 
 districts = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -65,41 +65,42 @@ def get_age():
 
 def check_credentials(age, district):
     while True:
-        if district in red_districts:
-            if age > 60 or age < 18:
-                joined_schedules = ', '.join(red_schedules)
-                return joined_schedules
+        if age > 60 or age < 18:
+            if district in red_districts:
+                district_color = "Red"
+                curfew_days = ', '.join(red_schedules)
+                return district_color, curfew_days
+    
+            elif district in blue_districts:
+                district_color = "Blue"
+                curfew_days = ', '.join(blue_schedules)
+                return district_color, curfew_days
+            
+            elif district in green_districts:
+                district_color = "Green"
+                curfew_days = ', '.join(blue_schedules)
+                return district_color, curfew_days
             else:
-                return red_schedules[0]
-
-        elif district in blue_districts:
-            if age > 60 or age < 18:
-                joined_schedules = ', '.join(blue_schedules)
-                return joined_schedules
-            else:
-                return blue_schedules[0]
-
-        elif district in green_districts:
-            if age > 60 or age < 18:
-                joined_schedules = ', '.join(blue_schedules)
-                return joined_schedules
-            else:
-                return green_schedules[0]
-
-        else:
-            print("You belong to me chariz")
-            return
-
-def get_district_color(district):
-    while True:
-        if district in red_districts:
-            return "Red"
-        elif district in blue_districts:
-            return "Blue"
-        elif district in green_districts:
-            return "Green"
+                print("You belong to me chariz")
+                return
         else: 
-            print("Error lmfao")
+            if district in red_districts:
+                district_color = "Red"
+                curfew_days = red_schedules[0]
+                return district_color, curfew_days
+    
+            elif district in blue_districts:
+                district_color = "Blue"
+                curfew_days = blue_schedules[0]
+                return district_color, curfew_days
+            
+            elif district in green_districts:
+                district_color = "Green"
+                curfew_days = green_schedules[0]
+                return district_color, curfew_days
+            else:
+                print("You belong to me chariz")
+                return
         
 #Main
 def display_profile():
@@ -107,14 +108,13 @@ def display_profile():
     name = get_name()
     age = get_age()
     district = get_district()
-    color = get_district_color(district)
-    schedules = check_credentials(age, district)
+    district_color, curfew_days = check_credentials(age, district)
     
     print("》》》》》》》》》》》》》》》》 HERE IS YOUR CURFEW SCHEDULE 《《《《《《《《《《《《《《《《")
     print("")
     print(f"☞ Name: {name}")
-    print(f"☞ District Color : {color}")
-    print(f"☞ Curfew Schedule : {schedules}, ")
+    print(f"☞ District Color : {district_color}")
+    print(f"☞ Curfew Schedule : {curfew_days}, ")
     print(f"☞ Sunday Curfew : 21:00 - 9:00")
     print("")
     print("》》》》》》》》》》》》》》》》》》》 PLEASE STAY SAFE! 《《《《《《《《《《《《《《《《《《《《")    
