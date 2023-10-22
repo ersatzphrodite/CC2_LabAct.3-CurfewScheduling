@@ -1,1 +1,3 @@
-# CC2_LabAct.3-CurfewScheduling
+# Ersatz Schedule System
+
+Ion really know wtf im doing man lol

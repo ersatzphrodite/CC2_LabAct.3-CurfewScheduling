@@ -1,5 +1,4 @@
 #   degree = BS CS / SET A
-
 import pandas as pd
 
 print("》》》》》》》》》》》》 PLEASE ENTER YOUR USER INFORMATION BELOW 《《《《《《《《《《《《")
@@ -9,35 +8,38 @@ age = int(input("⌨ Age: "))
 district_number = int(input("⌨ District Number: "))
 print("")
 
+#new variable set
+districts = ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9"]
 data = {
-    'District': [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    'Color': ['blue', 'red', 'blue', 'red', 'blue', 'red', 'green', 'green', 'green']
+    'Red': [districts[0], districts[2], districts[4]],
+    'Blue': [districts[1], districts[3], districts[5]],
+    'Green': [districts[6], districts[7], districts[8]]
 }
 
 color_mapping = pd.DataFrame(data)
 
-def get_curfew_schedule(age, district_number, color_mapping):
-    district_info = color_mapping[color_mapping['District'] == district_number]
+def get_curfew_schedule(age, district_input, color_mapping):
+    district_info = color_mapping[color_mapping.isin([district_input])].dropna(how='all')
     if not district_info.empty:
-        district_color = district_info['Color'].values[0]
+        district_color = district_info.columns[0]
         day = ""
         curfew_start = ""
         curfew_end = ""
 
         if age > 60 or age < 18:
-            if district_color == 'blue':
+            if district_color == 'Blue':
                 day = "Mon/Thu/Fri"
-            elif district_color == 'red':
+            elif district_color == 'Red':
                 day = "Wed/Sat/Mon"
-            elif district_color == 'green':
+            elif district_color == 'Green':
                 day = "Tue/Fri/Sat"
             curfew_start, curfew_end = "10PM", "5AM"
         else:
-            if district_color == 'blue':
+            if district_color == 'Blue':
                 day = "Mon/Wed"
-            elif district_color == 'red':
+            elif district_color == 'Red':
                 day = "Thu/Fri"
-            elif district_color == 'green':
+            elif district_color == 'Green':
                 day = "Tue/Sat"
             curfew_start, curfew_end = "6AM", "9PM"
 
